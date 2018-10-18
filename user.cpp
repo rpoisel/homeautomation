@@ -1,10 +1,11 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <PCF8574.h>
 
-static uint8_t I2C_ADDR_OUT = 0x20;
-static uint8_t I2C_ADDR_IN = 0x38;
+static PCF8574 pcfIn(0x38);
+static PCF8574 pcfOut(0x20);
 
-static uint8_t states_inputs_prev = 0xff, states_outputs = 0xff;
+static uint8_t states_inputs_prev = 0x00;
 
 void setup(void)
 {
@@ -13,21 +14,9 @@ void setup(void)
 
 void loop(void)
 {
-  uint8_t states_inputs_curr;
+  pcfOut.bitflip(BitHelpers::bitmask(BitHelpers::bitflip(states_inputs_prev), pcfIn.read()));
 
-  Wire.requestFrom(I2C_ADDR_IN, sizeof(states_inputs_curr));
-  while(Wire.available() < 1)
-  {
-  }
-  states_inputs_curr = Wire.read();
-
-  states_outputs ^= ((~states_inputs_prev) & states_inputs_curr);
-
-  Wire.beginTransmission(I2C_ADDR_OUT);
-  Wire.write(states_outputs);
-  Wire.endTransmission();
-
-  states_inputs_prev = states_inputs_curr;
+  states_inputs_prev = pcfIn.getCurVal();
 
   delay(20);
 }

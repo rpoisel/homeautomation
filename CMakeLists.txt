@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(homeautomation-rpo)
+project(homeautomation)
 
 set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(hardware)
+add_subdirectory(io)
 
 add_executable(homeautomation
   user.cpp
@@ -14,5 +15,5 @@ target_include_directories(homeautomation PUBLIC
 )
 
 target_link_libraries(homeautomation PUBLIC
-  hardware
+  IO
 )
