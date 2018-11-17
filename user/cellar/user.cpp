@@ -24,7 +24,7 @@ void loop(void)
 
   static std::vector<size_t> const simpleInputs = {0, 1, 2, 3, 4, 6, 7};
   static std::vector<PLC::RTrig> triggerInputs(simpleInputs.size());
-  static PLC::MultiClick multiClickBit5(1000000);
+  static PLC::MultiClick multiClickBit5(500000);
 
   for (auto idx = 0; idx < simpleInputs.size(); idx++)
   {

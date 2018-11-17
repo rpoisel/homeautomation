@@ -1,18 +1,6 @@
-add_executable(cellar
-  cellar.cpp
-)
+add_subdirectory(cellar)
+add_subdirectory(groundfloor)
 
-target_link_libraries(cellar
-  IO
-  PLC
-  ${CONAN_LIBS}
-)
-
-install(TARGETS cellar RUNTIME DESTINATION bin)
-
-# these dependencies / new targets had to be added here
-# adding them in another subdirectory lead to an empty
-# package (created by CPack)
 add_custom_target(docker
   COMMAND docker --version
 )
