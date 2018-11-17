@@ -3,6 +3,8 @@
 #include <PCF8574.h>
 #include <PLC.h>
 
+#include <mqtt/client.h>
+
 #include <vector>
 
 using namespace BitHelpers;

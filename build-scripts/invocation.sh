@@ -8,6 +8,7 @@ BLD_DIR=/tmp/build.homeautomation.linux-arm11
 	mkdir ${BLD_DIR} &&
 	cd ${BLD_DIR} &&
 	conan install ${SRC_DIR} -pr=raspberry &&
+	#conan install ${SRC_DIR} -pr=raspberry --build paho-c --build zlib --build OpenSSL --build paho-cpp --build Poco &&
 	cmake -GNinja \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-DCMAKE_TOOLCHAIN_FILE=${SRC_DIR}/build-scripts/cmake/toolchain/toolchain.linux-arm11.cmake \
