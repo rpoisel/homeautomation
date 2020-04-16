@@ -4,9 +4,9 @@
 
 uint8_t PCF8574::read()
 {
-  Wire.requestFrom(address, 1);
+  Wire.requestFrom(address, static_cast<uint8_t>(1));
   while(Wire.available() < 1) { }
-  curVal = BitHelpers::bitflip<uint8_t>(Wire.read());
+  curVal = BitHelpers::bitflip(static_cast<uint8_t>(Wire.read()));
   return curVal;
 }
 

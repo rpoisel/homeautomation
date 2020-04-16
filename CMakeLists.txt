@@ -10,7 +10,7 @@ conan_basic_setup()
 
 include(CPack)
 
-add_subdirectory(hardware)
-add_subdirectory(io)
-add_subdirectory(plc)
-add_subdirectory(user)
+add_subdirectory(arduino)
+add_subdirectory(lib/io/src)
+add_subdirectory(lib/plc/src)
+add_subdirectory(src)

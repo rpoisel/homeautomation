@@ -1,11 +1,7 @@
 #include <Arduino.h>
-#include <Wire.h>
 #include <PCF8574.h>
 #include <PLC.h>
-
-#include <mqtt/client.h>
-
-#include <vector>
+#include <Wire.h>
 
 using namespace BitHelpers;
 
@@ -18,15 +14,14 @@ void loop(void)
 {
   static PCF8574 pcfIn(0x38);
   static PCF8574 pcfOut(0x20);
+  static uint8_t const simpleInputs[] = {0, 1, 2, 3, 4, 6, 7};
+  static PLC::RTrig triggerInputs[sizeof(simpleInputs) / sizeof(simpleInputs[0])];
+  static PLC::MultiClick multiClickBit5(500000);
 
   uint8_t outputStates = pcfOut.getCurVal();
   uint8_t const inputStates = pcfIn.read();
 
-  static std::vector<size_t> const simpleInputs = {0, 1, 2, 3, 4, 6, 7};
-  static std::vector<PLC::RTrig> triggerInputs(simpleInputs.size());
-  static PLC::MultiClick multiClickBit5(500000);
-
-  for (auto idx = 0; idx < simpleInputs.size(); idx++)
+  for (size_t idx = 0; idx < (sizeof(simpleInputs) / sizeof(simpleInputs[0])); idx++)
   {
     if (triggerInputs[idx].trigger(bitget(inputStates, simpleInputs[idx])))
     {
@@ -50,4 +45,3 @@ void loop(void)
 
   delay(20);
 }
-

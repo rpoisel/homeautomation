@@ -3,8 +3,6 @@
 
 #include "bithelpers.h"
 
-#include <cstdint>
-
 class PCF8574
 {
   private:
