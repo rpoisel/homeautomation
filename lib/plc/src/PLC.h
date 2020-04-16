@@ -10,22 +10,18 @@
 #include <cstdint>
 #endif
 
-namespace PLC {
+namespace PLC
+{
 
-class RTrig {
+class RTrig
+{
   private:
   bool lastState;
 
   public:
-  RTrig() : RTrig(0)
-  {
-  }
-  RTrig(bool curState) : lastState(curState)
-  {
-  }
-  virtual ~RTrig()
-  {
-  }
+  RTrig() : RTrig(0) {}
+  RTrig(bool curState) : lastState(curState) {}
+  virtual ~RTrig() {}
 
   virtual bool trigger(bool curState);
 
@@ -41,14 +37,11 @@ using Timestamp = unsigned long;
 using Period = Poco::Timestamp::TimeDiff const;
 using Timestamp = Poco::Timestamp;
 #endif
-class MultiClick {
+class MultiClick
+{
   public:
-  MultiClick(Period const& period) : period(period), windowStart(0), cnt(0), cntLastWindow(0)
-  {
-  }
-  virtual ~MultiClick()
-  {
-  }
+  MultiClick(Period const& period) : period(period), windowStart(0), cnt(0), cntLastWindow(0) {}
+  virtual ~MultiClick() {}
   virtual size_t call(bool value);
 
   private:

@@ -9,7 +9,8 @@
 #include <cstdint>
 #endif
 
-namespace BitHelpers {
+namespace BitHelpers
+{
 
 template <typename T>
 T bitflip(T pattern)

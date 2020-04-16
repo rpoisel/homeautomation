@@ -5,10 +5,7 @@
 
 using namespace BitHelpers;
 
-void setup(void)
-{
-  Wire.begin();
-}
+void setup(void) { Wire.begin(); }
 
 void loop(void)
 {
@@ -29,16 +26,16 @@ void loop(void)
     }
   }
 
-  switch(multiClickBit5.call(bitget(inputStates, 5)))
+  switch (multiClickBit5.call(bitget(inputStates, 5)))
   {
-    case 1 /* single click */:
-      bitflipPos(outputStates, 5);
-      break;
-    case 2 /* double click */:
-      bitflipPos(outputStates, 2);
-      break;
-    default:
-      break;
+  case 1 /* single click */:
+    bitflipPos(outputStates, 5);
+    break;
+  case 2 /* double click */:
+    bitflipPos(outputStates, 2);
+    break;
+  default:
+    break;
   }
 
   pcfOut.write(outputStates);
