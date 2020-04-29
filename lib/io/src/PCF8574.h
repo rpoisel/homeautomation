@@ -19,7 +19,7 @@ class PCF8574
 
   inline void bitflip(uint8_t mask)
   {
-    curVal = BitHelpers::bitflip(curVal, mask);
+    BitHelpers::bitflip(curVal, mask);
     write(curVal);
   }
 };

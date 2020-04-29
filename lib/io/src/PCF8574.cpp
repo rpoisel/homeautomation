@@ -8,14 +8,16 @@ uint8_t PCF8574::read()
   while (Wire.available() < 1)
   {
   }
-  curVal = BitHelpers::bitflip(static_cast<uint8_t>(Wire.read()));
+  curVal = static_cast<uint8_t>(Wire.read());
+  BitHelpers::bitflip(curVal);
   return curVal;
 }
 
 void PCF8574::write(uint8_t states)
 {
   Wire.beginTransmission(address);
-  Wire.write(BitHelpers::bitflip(states));
+  BitHelpers::bitflip(states);
+  Wire.write(states);
   Wire.endTransmission();
   curVal = states;
 }

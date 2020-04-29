@@ -5,7 +5,16 @@
 
 using namespace BitHelpers;
 
-void setup(void) { Wire.begin(); }
+static unsigned long lastDebug;
+
+void setup(void)
+{
+  Wire.begin();
+  Serial.begin(19200);
+
+  Serial.println("setup() done.");
+  lastDebug = millis();
+}
 
 void loop(void)
 {
@@ -17,6 +26,17 @@ void loop(void)
 
   uint8_t outputStates = pcfOut.getCurVal();
   uint8_t const inputStates = pcfIn.read();
+
+  auto curDebug = millis();
+  if (curDebug - lastDebug > 500)
+  {
+    Serial.print("Alive. InputStates: ");
+    Serial.print(inputStates, HEX);
+    Serial.print(", OutputStates: ");
+    Serial.println(outputStates, HEX);
+
+    lastDebug = curDebug;
+  }
 
   for (size_t idx = 0; idx < (sizeof(simpleInputs) / sizeof(simpleInputs[0])); idx++)
   {

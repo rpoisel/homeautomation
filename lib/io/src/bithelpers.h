@@ -13,27 +13,27 @@ namespace BitHelpers
 {
 
 template <typename T>
-T bitflip(T pattern)
+void bitflip(T& pattern)
 {
-  return static_cast<T>(~pattern);
+  pattern = static_cast<T>(~pattern);
 }
 
 template <typename T>
-T bitflip(T& pattern, T mask)
+void bitflip(T& pattern, T mask)
 {
-  return pattern ^= mask;
+  pattern ^= mask;
 }
 
 template <typename T>
-T bitflipPos(T& pattern, size_t pos)
+void bitflipPos(T& pattern, size_t pos)
 {
-  return static_cast<T>(pattern ^ (1 << pos));
+  pattern = static_cast<T>((pattern ^ (1 << pos)));
 }
 
 template <typename T>
-T bitmask(T pattern, T mask)
+void bitmask(T& pattern, T mask)
 {
-  return pattern & mask;
+  return pattern &= mask;
 }
 
 template <typename T>
