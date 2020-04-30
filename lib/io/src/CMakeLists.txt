@@ -7,5 +7,6 @@ target_include_directories(IO PUBLIC
 )
 
 target_link_libraries(IO PUBLIC
+  BitHelpers
   Arduino
 )

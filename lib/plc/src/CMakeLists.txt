@@ -7,5 +7,5 @@ target_include_directories(PLC PUBLIC
 )
 
 target_link_libraries(PLC PUBLIC
-  rt
+  Arduino
 )

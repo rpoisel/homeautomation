@@ -1,12 +1,11 @@
 #ifndef PLC_H
 #define PLC_H
 
-#ifdef ARDUINO_ARCH_AVR
 #include <Arduino.h>
+#ifdef ARDUINO_ARCH_AVR
 #include <stddef.h>
 #include <stdint.h>
 #else
-#include <Poco/Timestamp.h>
 #include <cstdint>
 #endif
 
@@ -30,13 +29,9 @@ class RTrig
   RTrig& operator=(RTrig const&) = delete;
 };
 
-#ifdef ARDUINO_ARCH_AVR
 using Period = unsigned long;
 using Timestamp = unsigned long;
-#else
-using Period = Poco::Timestamp::TimeDiff const;
-using Timestamp = Poco::Timestamp;
-#endif
+
 class MultiClick
 {
   public:

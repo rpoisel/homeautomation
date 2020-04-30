@@ -33,7 +33,7 @@ void bitflipPos(T& pattern, size_t pos)
 template <typename T>
 void bitmask(T& pattern, T mask)
 {
-  return pattern &= mask;
+  pattern &= mask;
 }
 
 template <typename T>

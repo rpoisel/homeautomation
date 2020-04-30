@@ -9,11 +9,7 @@ bool PLC::RTrig::trigger(bool curState)
 
 size_t PLC::MultiClick::call(bool value)
 {
-#ifdef ARDUINO_ARCH_AVR
   Timestamp currentTime = millis();
-#else
-  Poco::Timestamp currentTime;
-#endif
 
   bool retVal = timeTrig.trigger(windowEndReached(currentTime));
 
