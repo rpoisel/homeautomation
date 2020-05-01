@@ -12,7 +12,7 @@ void setup(void)
   Wire.begin();
   Wire.setClock(32000);
 
-  pcfOut.write(0);
+  pcfOut.begin(0);
 }
 
 void loop(void)
@@ -45,10 +45,7 @@ void loop(void)
     break;
   }
 
-  if (outputStates != pcfOut.getCurVal())
-  {
-    pcfOut.write(outputStates);
-  }
+  pcfOut.write(outputStates);
 
   delay(20);
 }

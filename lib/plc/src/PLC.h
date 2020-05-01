@@ -12,17 +12,17 @@
 namespace PLC
 {
 
-class RTrig
+class RTrig final
 {
   private:
   bool lastState;
 
   public:
   RTrig() : RTrig(0) {}
-  RTrig(bool curState) : lastState(curState) {}
-  virtual ~RTrig() {}
+  explicit RTrig(bool curState) : lastState(curState) {}
+  ~RTrig() {}
 
-  virtual bool trigger(bool curState);
+  bool trigger(bool curState);
 
   private:
   RTrig(RTrig const&) = delete;
@@ -32,18 +32,20 @@ class RTrig
 using Period = unsigned long;
 using Timestamp = unsigned long;
 
-class MultiClick
+class MultiClick final
 {
   public:
-  MultiClick(Period const& period) : period(period), windowStart(0), cnt(0), cntLastWindow(0) {}
-  virtual ~MultiClick() {}
-  virtual size_t call(bool value);
+  explicit MultiClick(Period const& period)
+      : period(period), windowStart(0), cnt(0), cntLastWindow(0)
+  {}
+  ~MultiClick() {}
+  size_t call(bool value);
 
   private:
   MultiClick(MultiClick const&) = delete;
   MultiClick& operator=(MultiClick const&) = delete;
 
-  inline bool windowEndReached(Timestamp& currentTime) const
+  inline bool windowEndReached(Timestamp const& currentTime) const
   {
     return currentTime - windowStart > period;
   }
