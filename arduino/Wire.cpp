@@ -3,11 +3,11 @@
 #include <linux/i2c-dev.h>
 
 #include <fcntl.h>
-#include <unistd.h>
 #include <sys/ioctl.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 #include <cstdint>
 #include <cstdlib>
@@ -34,15 +34,11 @@ TwoWire::~TwoWire()
   close(fd);
 }
 
-void TwoWire::begin()
-{
-  begin(0);
-}
+void TwoWire::begin() { begin(0); }
 
-void TwoWire::begin(uint8_t address)
-{
-  (void)address;
-}
+void TwoWire::begin(uint8_t address) { (void)address; }
+
+void TwoWire::setClock(uint32_t clock) { (void)clock; }
 
 void TwoWire::beginTransmission(uint8_t address)
 {
@@ -90,14 +86,8 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity)
   return recvBufLen;
 }
 
-int TwoWire::available(void)
-{
-  return recvBufLen - (readPos - &recvBuf[0]);
-}
+int TwoWire::available(void) { return recvBufLen - (readPos - &recvBuf[0]); }
 
-int TwoWire::read(void)
-{
-  return *readPos++;
-}
+int TwoWire::read(void) { return *readPos++; }
 
 TwoWire Wire = TwoWire();

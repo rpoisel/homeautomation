@@ -9,6 +9,7 @@ include(CTest)
 include(CPack)
 
 add_subdirectory(lib/bithelpers/src)
+add_subdirectory(lib/plc/src)
 
 if (BUILD_TARGET STREQUAL "test")
   add_subdirectory(test)
@@ -18,6 +19,5 @@ else ()
 
   add_subdirectory(arduino)
   add_subdirectory(lib/io/src)
-  add_subdirectory(lib/plc/src)
   add_subdirectory(src)
 endif ()

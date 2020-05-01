@@ -10,6 +10,7 @@ static unsigned long lastDebug;
 void setup(void)
 {
   Wire.begin();
+  Wire.setClock(32000);
   Serial.begin(19200);
 
   Serial.println("setup() done.");
@@ -22,7 +23,7 @@ void loop(void)
   static PCF8574 pcfOut(0x20);
   static uint8_t const simpleInputs[] = {0, 1, 2, 3, 4, 6, 7};
   static PLC::RTrig triggerInputs[sizeof(simpleInputs) / sizeof(simpleInputs[0])];
-  static PLC::MultiClick multiClickBit5(300000);
+  static PLC::MultiClick multiClickBit5(300);
 
   uint8_t outputStates = pcfOut.getCurVal();
   uint8_t const inputStates = pcfIn.read();

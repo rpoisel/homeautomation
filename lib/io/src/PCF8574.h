@@ -16,12 +16,6 @@ class PCF8574
   virtual uint8_t read(void);
   virtual void write(uint8_t states);
   inline virtual uint8_t getCurVal(void) const { return curVal; }
-
-  inline void bitflip(uint8_t mask)
-  {
-    BitHelpers::bitflip(curVal, mask);
-    write(curVal);
-  }
 };
 
 #endif /* PCF8574_H */
