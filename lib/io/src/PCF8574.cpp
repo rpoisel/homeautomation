@@ -15,9 +15,10 @@ uint8_t PCF8574::read()
 
 void PCF8574::write(uint8_t states)
 {
+  auto writeStates = states;
+  BitHelpers::bitflip(writeStates);
   Wire.beginTransmission(address);
-  BitHelpers::bitflip(states);
-  Wire.write(states);
+  Wire.write(writeStates);
   Wire.endTransmission();
   curVal = states;
 }

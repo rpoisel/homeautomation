@@ -5,6 +5,7 @@
 
 using namespace BitHelpers;
 
+static PCF8574 pcfOut(0x20);
 static unsigned long lastDebug;
 
 void setup(void)
@@ -13,14 +14,14 @@ void setup(void)
   Wire.setClock(32000);
   Serial.begin(19200);
 
-  Serial.println("setup() done.");
+  pcfOut.write(0);
   lastDebug = millis();
+  Serial.println("setup() done.");
 }
 
 void loop(void)
 {
   static PCF8574 pcfIn(0x38);
-  static PCF8574 pcfOut(0x20);
   static uint8_t const simpleInputs[] = {0, 1, 2, 3, 4, 6, 7};
   static PLC::RTrig triggerInputs[sizeof(simpleInputs) / sizeof(simpleInputs[0])];
   static PLC::MultiClick multiClickBit5(300);
@@ -59,7 +60,15 @@ void loop(void)
     break;
   }
 
-  pcfOut.write(outputStates);
+  if (outputStates != pcfOut.getCurVal())
+  {
+#if 1
+    pcfOut.write(outputStates);
+#else
+    Serial.print("Would write: ");
+    Serial.println(outputStates, HEX);
+#endif
+  }
 
   delay(20);
 }

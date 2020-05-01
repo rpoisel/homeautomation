@@ -6,11 +6,11 @@
 class PCF8574
 {
   private:
-  uint8_t address;
+  uint8_t const address;
   uint8_t curVal;
 
   public:
-  PCF8574(uint8_t address) : address(address) {}
+  PCF8574(uint8_t address) : address(address), curVal(0) {}
   virtual ~PCF8574() {}
 
   virtual uint8_t read(void);
