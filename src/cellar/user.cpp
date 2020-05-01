@@ -6,17 +6,13 @@
 using namespace BitHelpers;
 
 static PCF8574 pcfOut(0x20);
-static unsigned long lastDebug;
 
 void setup(void)
 {
   Wire.begin();
   Wire.setClock(32000);
-  Serial.begin(19200);
 
   pcfOut.write(0);
-  lastDebug = millis();
-  Serial.println("setup() done.");
 }
 
 void loop(void)
@@ -28,17 +24,6 @@ void loop(void)
 
   uint8_t outputStates = pcfOut.getCurVal();
   uint8_t const inputStates = pcfIn.read();
-
-  auto curDebug = millis();
-  if (curDebug - lastDebug > 500)
-  {
-    Serial.print("Alive. InputStates: ");
-    Serial.print(inputStates, HEX);
-    Serial.print(", OutputStates: ");
-    Serial.println(outputStates, HEX);
-
-    lastDebug = curDebug;
-  }
 
   for (size_t idx = 0; idx < (sizeof(simpleInputs) / sizeof(simpleInputs[0])); idx++)
   {
@@ -62,12 +47,7 @@ void loop(void)
 
   if (outputStates != pcfOut.getCurVal())
   {
-#if 1
     pcfOut.write(outputStates);
-#else
-    Serial.print("Would write: ");
-    Serial.println(outputStates, HEX);
-#endif
   }
 
   delay(20);
